@@ -118,7 +118,7 @@ class App extends Component{
                         rules: [
                           { required: true, message: '温度不能为空！' },
                         ],
-                      })(<InputNumber onChange={ !checked ? null : this.handleInputChange} style={{width: '50%'}} placeholder="请输入温度" />)
+                      })(<InputNumber onChange={ !checked ? null : this.handleInputChange} style={{width: '50%'}} placeholder="请输入" />)
                     }
                   }))
                 ]}
