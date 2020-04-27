@@ -77,6 +77,8 @@ class App extends Component{
     const { form } = this.props
     const { resultList, fixed, checked, layout } = this.state
 
+    console.log(checked, 'checked')
+
     return (
        <div style={{ margin: '50px auto' }}>
          <div style={{ fontSize: 50, textAlign: 'center', position: 'relative' }}>17系列20℃箱内压力转换器</div>
@@ -140,7 +142,7 @@ class App extends Component{
                    }} value={fixed} min={0} style={{width: 50}} max={22} /> 位小数
                    </FormItem>
                    <FormItem label="实时计算" style={{ margin: '0 40px' }}>
-                     <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={false} onClick={checked => this.setState({checked}, this.handleSubmit())} />
+                     <Switch checkedChildren="开" unCheckedChildren="关"  checked={checked} onClick={checked => this.setState({checked}, this.handleSubmit())} />
                    </FormItem>
                    <Button onClick={() => {
                      form.resetFields()
@@ -195,7 +197,7 @@ class App extends Component{
                    {isNaN(resultList[0] - resultList[4]) ? '输入未完成' : (resultList[0] - resultList[4]).toFixed(fixed)}
                  </FormItem>
                  <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="实时计算">
-                   <Switch checkedChildren="开" unCheckedChildren="关" defaultChecked={false} onClick={checked => this.setState({checked}, this.handleSubmit())} />
+                   <Switch checkedChildren="开" unCheckedChildren="关" checked={checked} onClick={checked => this.setState({checked}, this.handleSubmit())} />
                  </FormItem>
                  <div style={{float: 'right',}}>
                    <Button onClick={() => {
