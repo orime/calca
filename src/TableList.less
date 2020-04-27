@@ -1,0 +1,207 @@
+@import '~antd/lib/style/themes/default.less';
+@import '~@/utils/utils.less';
+
+.ant-table-small {
+  border:none;
+}
+.tableList {
+  margin-left: 1px;
+  margin-right: 1px;
+  border: none;
+  .tableListOperator {
+    margin-bottom: 16px;
+    button {
+      margin-right: 8px;
+    }
+  }
+  th.leftAlign {
+    text-align: center !important;
+  }
+  th.centerAlign {
+    text-align: center !important;
+  }
+  th.rightAlign {
+    text-align: center !important;
+  }
+  td.leftAlign {
+    text-align: left !important;
+  }
+  td.centerAlign {
+    text-align: center !important;
+  }
+  td.rightAlign {
+    text-align: right !important;
+  }
+}
+
+.tableListForm {
+  :global {
+    .ant-form-item {
+      margin-bottom: 24px;
+      margin-right: 0;
+      display: flex;
+      > .ant-form-item-label {
+        width: auto;
+        line-height: 32px;
+        padding-right: 8px;
+      }
+      .ant-form-item-control {
+        line-height: 32px;
+      }
+    }
+    .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+  }
+  .submitButtons {
+    display: block;
+    white-space: nowrap;
+    margin-bottom: 24px;
+  }
+}
+
+.treeList {
+  div {
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
+.rowList {
+  div {
+    width: 100%;
+    overflow-x: auto;
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 24px;
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .tableListForm :global(.ant-form-item) {
+    margin-right: 8px;
+  }
+}
+
+.scrollModel {
+  width: 100%;
+  height: 500px;
+  //height: 75%;
+  overflow: auto;
+  padding: 8px;
+}
+.blueBlock {
+  margin-left: 50px;
+  width: 17px;
+  height: 26px;
+  background: inherit;
+  background-color: rgba(0, 153, 255, 1);
+  border: none;
+  border-radius: 0;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.titleTwo {
+  white-space: nowrap;
+  font-size: 17px;
+  font-weight: bold;
+  margin-left: 16px;
+}
+.schoolTitle {
+  white-space: nowrap;
+  font-size: 17px;
+}
+
+.titleThree {
+  white-space: nowrap;
+  font-size: 19px;
+  font-weight: bold;
+  margin-left: 9px;
+  margin-top: 10px;
+}
+
+.divRadius {
+  border-radius:3px 4px 5px 6px;
+  border:3px solid #f8f8f8;
+  height:230px;
+  margin-bottom: 18px;
+}
+
+.divRadiusVideo {
+  border-radius:3px 4px 5px 6px;
+  border:2px solid #f8f8f8;
+  height:110px;
+  margin-bottom: 18px;
+}
+
+.circleA {
+  width:120px;
+  height:120px;
+  line-height:30px;
+  border-radius:50%;
+  font-size:24px;
+  background:rgba(248,205,65,1);
+  text-align: center;
+}
+.circleB {
+  width:120px;
+  height:120px;
+  line-height:30px;
+  border-radius:50%;
+  font-size:24px;
+  background:rgba(75,197,110,1);
+}
+.circleC {
+  width:120px;
+  height:120px;
+  line-height:30px;
+  border-radius:50%;
+  font-size:24px;
+  background:rgba(58,152,257,1);
+}
+.middleA {
+  text-align:center;
+  line-height: 120px;
+  width: 100%;
+  color: #fff;
+}
+
+.modalCardPadding { // 用于modal包含card，消除modal的padding
+  :global {
+    .ant-modal-body {
+      padding: 0;
+      .ant-card-body {
+        padding-bottom: 0;
+      }
+    }
+  }
+}
+
+// 带有全屏显示的pro-table组件
+.protable {
+  :global {
+    .ant-pro-table-toolbar {
+      //display: block !important;
+      padding: 0px;
+      height: 22px;
+
+      .ant-pro-table-toolbar-option {
+        //display: block !important;
+      }
+    }
+    .ant-table-wrapper {
+      margin-top: 22px;
+    }
+    .ant-pro-table-column-setting-list-item-option {
+      pointer-events:none;
+      opacity: 0;
+    }
+    .ant-pro-table-alert {
+      margin: 19px 0px;
+    }
+  }
+}

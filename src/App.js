@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Button, Form, InputNumber, Card, Row, Col, Switch  } from 'antd';
+import { Button, Form, InputNumber, Card, Row, Col, Switch, Table  } from 'antd';
+import styles from './TableList.less'
 
 const FormItem = Form.Item;
 
@@ -18,12 +19,12 @@ class App extends Component{
 
   constructor() {
     super()
-    this.handleInput = debounce(this.handleInput, 500)
+    this.handleInput = debounce(this.handleInput, 300)
   }
 
   state = {
     resultList: [],
-    fixed: 0,
+    fixed: 3,
     checked: false
   }
 
@@ -78,34 +79,64 @@ class App extends Component{
        <div style={{ margin: '50px auto' }}>
          <div style={{ fontSize: 50, textAlign: 'center' }}>温度压力计算</div>
          <Card style={{ margin: 50 }}>
-         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+           <Table
+              columns={[
+                {
+                  title: '压力',
+                  dataIndex: 'pressure',
+                  className: styles.centerAlign,
+                },
+                ...Array.from({length: 5}, (item, index) => ({
+                  title: `第${index + 1}天`,
+                  dataIndex: `alias`,
+                  className: styles.centerAlign,
+                  render: (text, record) => {
+                    if(text === 'd'){
+                      return resultList[index]
+                    }
+                    return this.props.form.getFieldDecorator(text+index, {
+                        rules: [
+                          { required: true, message: '温度不能为空！' },
+                        ],
+                      })(<InputNumber onChange={ !checked ? null : this.handleInputChange} style={{width: '50%'}} placeholder="请输入温度" />)
+                  }
+                }))
+              ]}
+              dataSource={[
+                {pressure: '表压(kPa)', alias: 'a'},
+                {pressure: '场地大气压(kPa)', alias: 'b'},
+                {pressure: '场地温度(℃)', alias: 'c'},
+                {pressure: '箱内气体压力(kPa)', alias: 'd'},
+              ]}
+           />
 
+         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
            {
              Array.from({length: 5}, (item, index) => (
-                <Col xs={24} sm={24} md={8} lg={4}>
+                <Col xs={24} sm={24} md={8} lg={8}>
                   <Card title={`第${index+1}组`}>
-                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="表压">
+                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="表压（kPa）">
                       {form.getFieldDecorator('a'+index, {
                         rules: [
                           { required: true, message: '表压不能为空！' },
                         ],
                       })(<InputNumber onChange={ !checked ? null : this.handleInputChange} style={{width: '100%'}} placeholder="请输入表压" />)}
                     </FormItem>
-                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="大气压">
+                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="场地大气压（kPa）">
                       {form.getFieldDecorator('b'+index, {
                         rules: [
                           { required: true, message: '大气压不能为空！' },
                         ],
                       })(<InputNumber onChange={ !checked ? null : this.handleInputChange} style={{width: '100%'}} placeholder="请输入大气压" />)}
                     </FormItem>
-                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="温度">
+                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="场地温度（℃）">
                       {form.getFieldDecorator('c'+index, {
                         rules: [
                           { required: true, message: '温度不能为空！' },
                         ],
                       })(<InputNumber onChange={ !checked ? null : this.handleInputChange} style={{width: '100%'}} placeholder="请输入温度" />)}
                     </FormItem>
-                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="计算结果">
+                    <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="箱内气体压力（kPa）">
                       {isNaN(resultList[index]) ? checked ? '输入不完整' : '输入完毕后点击计算' : resultList[index]}
                     </FormItem>
                   </Card>
@@ -113,14 +144,14 @@ class App extends Component{
              ))
            }
 
-           <Col xs={24} sm={16} md={8} lg={4} style={{height: '100%'}}>
+           <Col xs={24} sm={16} md={8} lg={8} style={{height: '100%'}}>
              <Card title={`操作`} style={{height: '100%'}}>
              <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="精度">
                保留 <InputNumber onChange={value => {
                this.setState({fixed: value}, this.handleSubmit)
              }} value={fixed} min={0} style={{width: 50}} max={22} /> 位小数
              </FormItem>
-               <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="差值">
+               <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="泄漏量（kPa）">
                  {isNaN(resultList[0] - resultList[4]) ? '输入未完成' : resultList[0] - resultList[4]}
                </FormItem>
                <FormItem labelCol={{ span: 7 }} wrapperCol={{ span: 15 }} label="实时计算">
