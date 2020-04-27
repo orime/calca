@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+.tableList {
+  margin-left: 1px;
+  margin-right: 1px;
+  border: none;}
+.tableListOperator {
+  margin-bottom: 16px;}
+button {
+  margin-right: 8px;
+}
+
+th.leftAlign {
+  text-align: center !important;
+}
+th.centerAlign {
+  text-align: center !important;
+}
+th.rightAlign {
+  text-align: center !important;
+}
+td.leftAlign {
+  text-align: left !important;
+}
+td.centerAlign {
+  text-align: center !important;
+}
+td.rightAlign {
+  text-align: right !important;
+}
